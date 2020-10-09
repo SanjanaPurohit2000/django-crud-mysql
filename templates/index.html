@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block form %}
+    <form id="addStudent" name="addStudent" method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Insert" id="submitStudent">
+        <button type="button" id="editStudent" style="display:none">Submit</button>
+    </form>
+{% endblock %}
+{% block entries %}
+    <table border="1" id="studentdata">
+        <tr>
+            <th>Eno.</th>
+            <th>Name</th>
+            <th>Branch</th>
+            <th>Action</th>
+        </tr>
+        {% for entry in studentdata %}
+            <tr>
+                <td>{{ entry.eno }}</td>
+                <td>{{ entry.name }}</td>
+                <td>{{ entry.branch }}</td>
+                <td>
+                    <button class="editStudent" id="eStudent{{ entry.id }}" type="button">Update</button>
+                    <button class="deleteStudent" id="dStudent{{ entry.id }}" type="button">Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
